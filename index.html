@@ -11,6 +11,12 @@
             height: 200px;
             width: 200px;
         }
+        .two {
+            background-color: red;
+        }
+        .three { 
+            background-color: aqua;
+        }
     </style>
 </head>
 <body>
@@ -19,12 +25,10 @@
        <input type="text" v-model="greeting">
        <hr>
        <div v-if="isVisible" class="box"></div>
-       <!-- v-if is simillar to if statement in js -->
+       <div v-else-if="isVisible2" class="box two"></div>
+       <div v-else class="box three"></div>
+       <!-- v-else-if is simillar to else if ladder statement in js -->
        <hr>
-       <div v-show="isVisible" class="box">/div>
-        <!-- v-show is simillar to v-if. Only difference is for false value it will render the div on dom with display:none;
-        and for false value v-if doesn't render the div to DOM at all.
-        -->
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
@@ -32,7 +36,8 @@
             data: function() {
                 return {
                     greeting : "Hello Vue 3!",
-                    isVisible: false
+                    isVisible: false,
+                    isVisible2 : false,
                 }
             }
         });
