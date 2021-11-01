@@ -17,10 +17,16 @@
         .three { 
             background-color: aqua;
         }
+        [v-clock]{
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
+        <!-- v-cloak is a vue directive that renders application after the app is ready.
+        which means its a cloak till the app renders
+        -->
        {{ greeting }}
        <input type="text" v-model="greeting">
        <hr>
