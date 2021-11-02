@@ -44,6 +44,7 @@
         app.component('login-form',{
             template: `
             <form @submit.prevent="handleSubmit">
+                <p v-for='str in inputs' :key="str"> {{str}} </p>
                 <h1>{{title}}</h1>
                 <custom-input v-model="email" label="Email" type="email" />
                 <!-- 
@@ -62,6 +63,11 @@
             data(){
                 return {
                     title: 'Login Form',
+                    inputs: [
+                    "email",
+                    "password",
+                    "name"
+                    ],
                     email: "",
                     password: "",
                 }
