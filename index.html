@@ -44,18 +44,15 @@
         app.component('login-form',{
             template: `
             <form @submit.prevent="handleSubmit">
-                <p v-for='str in inputs' :key="str"> {{str}} </p>
                 <h1>{{title}}</h1>
-                <custom-input v-model="email" label="Email" type="email" />
-                <!-- 
-                    v-bind modifier allows us to pass the variables data to child components
-                    :label is exactly simillar to v-bind:label
-                -->
-                <custom-input v-model="password" label="Password" type="password" />
-                <!-- 
-                    Here in Custom Component, what v-model does is create a variable called modelValue and passes it to child component.
-                    v-model is also listening to $emit() event fired from child component.
-                -->
+                <!-- Looping Over and Creating Custom Input Components -->
+                <custom-input 
+                    v-for="(input, i) in inputs"
+                    :key='i'
+                    :label="input.label" 
+                    :type="input.type" 
+                    v-model="input.value" 
+                />
                 <button>Login</button>
             </form>
             `,
@@ -64,19 +61,24 @@
                 return {
                     title: 'Login Form',
                     inputs: [
-                    "email",
-                    "password",
-                    "name"
-                    ],
-                    email: "",
-                    password: "",
+                    {
+                        type : "email",
+                        label: 'Email',
+                        value: '',
+                    },
+                    {
+                        type : "password",
+                        label: 'Password',
+                        value: '',
+                    }
+                    ]
                 }
             },
             methods: {
                 handleSubmit() {
                     console.log(" Submitted ");
-                    console.log("Email : ", this.email);
-                    console.log("Password : ", this.password);
+                    console.log("Email : ", this.inputs[0].value);
+                    console.log("Password : ",  this.inputs[1].value);
                 }
             }
         })
@@ -84,10 +86,10 @@
             template: `
             <label>
                 {{label}}
-                <input type="text" v-model="inputValue" />
+                <input :type="type" v-model="inputValue" />
             </label>
             `,
-            props: ['label', 'modelValue'],
+            props: ['label', 'type', 'modelValue'],
             // Here we need to specify the props we are expcting from the parent component
             computed: {
                 inputValue: {
