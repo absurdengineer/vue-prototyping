@@ -45,11 +45,20 @@
             template: `
             <form @submit.prevent="handleSubmit">
                 <h1>{{title}}</h1>
-                <input type="email" v-model="email" />
-                <input type="password" v-model="password" />
+                <custom-input v-model="email" label="Email" type="email" />
+                <!-- 
+                    v-bind modifier allows us to pass the variables data to child components
+                    :label is exactly simillar to v-bind:label
+                -->
+                <custom-input v-model="password" label="Password" type="password" />
+                <!-- 
+                    Here in Custom Component, what v-model does is create a variable called modelValue and passes it to child component.
+                    v-model is also listening to $emit() event fired from child component.
+                -->
                 <button>Login</button>
             </form>
             `,
+            components : ['custom-input'],
             data(){
                 return {
                     title: 'Login Form',
@@ -62,6 +71,34 @@
                     console.log(" Submitted ");
                     console.log("Email : ", this.email);
                     console.log("Password : ", this.password);
+                }
+            }
+        })
+        app.component('custom-input',{
+            template: `
+            <label>
+                {{label}}
+                <input type="text" v-model="inputValue" />
+            </label>
+            `,
+            props: ['label', 'modelValue'],
+            // Here we need to specify the props we are expcting from the parent component
+            computed: {
+                inputValue: {
+                    get() {
+                        return this.modelValue
+                    },
+                    set(value) {
+                        this.$emit('update:modelValue', value);
+                        // $emit() basically emits events that other components can listen to.(built in/ custom events both)
+                        // First Argument is the event we are emitting from here and second argument is the data
+                        // v-model in Parent Component is automatically listening to this event and updates the data.
+                    }
+                }
+            },
+            data() {
+                return {
+                    
                 }
             }
         })
