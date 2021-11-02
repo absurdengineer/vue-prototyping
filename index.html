@@ -18,9 +18,15 @@
 </head>
 <body>
     <div id="app" v-cloak>
+        {{greeting}}
         <!-- @click is exactly same as v-on.click -->
         <button @click="handleToggle(isVisible)">Toggle Box</button>
         <div v-if="isVisible" class="box"></div>
+        <input type="text" @keyup.enter="greet" v-model='greeting'>
+        <!-- 
+            here we are specifically listening to enter key up
+            we can also use @click.right for tracing right click 
+        -->
        <hr>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
@@ -35,6 +41,9 @@
             methods: {
                 handleToggle(isVisible) {
                     this.isVisible = !isVisible
+                },
+                greet(){
+                    console.log(this.greeting);
                 }
             }
         });
