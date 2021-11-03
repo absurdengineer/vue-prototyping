@@ -8,8 +8,13 @@
   <body>
     <div id="app">
       <label> <input type="checkbox" v-model="isPurple" /> Purple </label>
-
-      <div class="circle" :class="{ purple : isPurple}">Hi!</div>
+      <select v-model="selectedColor">
+        <option value="" disabled selected>Choose One</option>
+        <option value="text-blue">Blue</option>
+        <option value="text-black">Black</option>
+        <option value="text-orange">Orange</option>
+      </select>
+      <div class="circle" :class="[selectedColor, circleClasses]">Hi!</div>
       <!-- 
         Class Binding can be performed by passing an object to :class 
         in which keyname would be classname and value would be a condition 
