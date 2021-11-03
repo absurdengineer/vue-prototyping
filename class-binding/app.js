@@ -1,6 +1,6 @@
 let vm = Vue.createApp({
   data() {
-    return { isPurple: false, selectedColor: "" };
+    return { isPurple: false, selectedColor: "", size: 150 };
   },
   computed: {
     circleClasses() {

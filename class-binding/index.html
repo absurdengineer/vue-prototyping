@@ -14,7 +14,19 @@
         <option value="text-black">Black</option>
         <option value="text-orange">Orange</option>
       </select>
-      <div class="circle" :class="[selectedColor, circleClasses]">Hi!</div>
+
+      <input type="number" v-model.number="size" />
+
+      <div
+        class="circle"
+        :class="[selectedColor, circleClasses]"
+        :style="[
+        { width : size + 'px' , height : size + 'px', lineHeight : size + 'px' }, 
+        { transform : 'rotate(30deg)' }
+        ]"
+      >
+        Hi!
+      </div>
       <!-- 
         Class Binding can be performed by passing an object to :class 
         in which keyname would be classname and value would be a condition 
