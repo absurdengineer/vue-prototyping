@@ -1,0 +1,22 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <title>VueJS Course</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <label> <input type="checkbox" v-model="isPurple" /> Purple </label>
+
+      <div class="circle" :class="{ purple : isPurple}">Hi!</div>
+      <!-- 
+        Class Binding can be performed by passing an object to :class 
+        in which keyname would be classname and value would be a condition 
+      -->
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
